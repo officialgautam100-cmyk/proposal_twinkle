@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Gautam ❤️ Twinkle</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Poppins",sans-serif;scroll-behavior:smooth;}
+body{background:#fff0f6;overflow-x:hidden;text-align:center;}
+
+/* HERO */
+.hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;background:linear-gradient(135deg,#ff4b79,#ff8da1);color:white;position:relative;}
+.hero h1{font-size:3rem;animation:fadeDown 1.8s ease forwards;position:relative;}
+.hero p{font-size:1.3rem;opacity:0;margin-top:12px;animation:fade 2s 1s ease forwards;}
+@keyframes fadeDown{from{transform:translateY(-50px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+@keyframes fade{from{opacity:0;}to{opacity:1;}}
+
+/* Sparkle effect around name */
+.sparkle-container{position:relative;display:inline-block;}
+.sparkle{position:absolute;color:#fff9f0;font-size:1rem;opacity:0;animation: sparkleFloat 3s linear infinite;}
+@keyframes sparkleFloat{
+  0% {opacity:0; transform: translate(0,0) scale(0.5) rotate(0deg);}
+  10% {opacity:1; transform: translate(var(--x), var(--y)) scale(1) rotate(45deg);}
+  50% {opacity:0.8; transform: translate(calc(var(--x)/2), calc(var(--y)/2)) scale(1.2) rotate(90deg);}
+  100% {opacity:0; transform: translate(0,0) scale(0.5) rotate(135deg);}
+}
+
+/* GALLERY - SLOW AUTOPLAY */
+.slider{width:90%;max-width:520px;height:300px;margin:35px auto 0;border-radius:22px;overflow:hidden;position:relative;}
+.slide{width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;opacity:0;transition:opacity 1s ease;}
+.slide.active{opacity:1;}
+
+/* LOVE LETTER */
+.letter{padding:70px 20px;background:white;text-align:center;}
+.letter h2{font-size:2.5rem;background:linear-gradient(to right,#ff4b79,#d6336c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:22px;font-weight:700;}
+.type-box{width:94%;max-width:720px;min-height:220px;background:#fff5fa;margin:auto;padding:30px;border-radius:22px;border:2px solid #ffd6e4;box-shadow:0 6px 18px rgba(255,75,121,0.18);}
+#love-text{font-size:1.25rem;color:#b02a55;line-height:1.9;white-space:pre-wrap;font-weight:500;}
+.voice-player{margin-top:18px;width:85%;max-width:330px;}
+
+/* PROPOSAL */
+.proposal{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:linear-gradient(135deg,#ff2e63,#ff85a2);color:white;padding:20px;position:relative;}
+.proposal h1{font-size:2.8rem;animation:pop 1.5s ease;}
+@keyframes pop{0%{transform:scale(0.5);opacity:0;}100%{transform:scale(1);opacity:1;}}
+.yes-btn{margin-top:28px;padding:14px 32px;border:none;background:white;color:#ff2e63;font-size:1.2rem;font-weight:700;border-radius:50px;cursor:pointer;transition:0.3s;box-shadow:0 4px 15px rgba(255,255,255,0.3);}
+.yes-btn:hover{transform:scale(1.2);box-shadow:0 0 20px white;}
+
+/* YES EFFECT */
+.blink-text{animation:blink 0.8s infinite alternate;}
+@keyframes blink{0%{opacity:0.3;transform:scale(1);}100%{opacity:1;transform:scale(1.08);}}
+.rain-item{position:fixed;top:-10vh;animation:fall 5s linear infinite;opacity:0.85;z-index:999;}
+.rose-item{position:fixed;top:-10vh;animation:fall 6s linear infinite;opacity:0.7;font-size:18px;z-index:998;}
+@keyframes fall{0%{transform:translateY(0);}100%{transform:translateY(110vh);}}
+
+/* Responsive */
+@media(max-width:768px){
+.hero h1{font-size:2.2rem;}
+.slider{height:220px;}
+.letter h2{font-size:1.95rem;}
+#love-text{font-size:1.05rem;}
+.proposal h1{font-size:2rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- Hidden YouTube player for Bargad -->
+<div style="display:none;">
+  <iframe id="bg-music-iframe" width="1" height="1"
+    src="https://www.youtube.com/embed/sfDyzZPIqSc?enablejsapi=1&loop=1&playlist=sfDyzZPIqSc"
+    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+  </iframe>
+</div>
+
+<!-- HERO --> 
+<section class="hero">
+  <h1 id="hero-name">TWINKLE
+     <span class="sparkle-container"></span></h1>
+  <p>Some love stories feel like magic… ours feels like home ❤️</p>
+</section>
+
+<!-- GALLERY -->
+<section class="slider">
+  <img class="slide" src="/images/image5.jpg">
+  <img class="slide" src="/images/image4.jpg">
+<img class="slide" src="/images/image2.jpg">
+<img class="slide" src="/images/image4.jpg">
+<img class="slide" src="/images/image1.jpg">
+</section>
+
+<!-- LOVE LETTER -->
+<section class="letter">
+  <h2>My Heart in Words 💌</h2>
+  <div class="type-box"><p id="love-text"></p></div>
+  <audio controls class="voice-player">
+    <source src="YOUR_VOICE.mp3" type="audio/mp3">
+  </audio>
+</section>
+
+<!-- PROPOSAL -->
+<section class="proposal">
+  <h1 id="proposal-text">Moti…<br/>Will you be my forever? 💍❤️</h1>
+  <button class="yes-btn" onclick="yesClicked()">YES 💖</button>
+</section>
+
+<script>
+// Activate Bargad music on first click
+document.addEventListener("click", function firstTap(){
+  let iframe = document.getElementById("bg-music-iframe");
+  iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+  document.removeEventListener("click", firstTap);
+});
+
+// Auto-typing love letter
+const text = `Moti…💗
+I don’t know kya hua hai tumko hum,
+Lekin itna pata hai…
+If you ever feel sad, alone, or not well,
+You can always count on me ❤️
+Tumhari happiness mere liye sabse important hai.
+I want to be your peace, your safe place.
+Tumhara, Gautam 💌`;
+let i=0;
+function typeWriter(){
+  if(i<text.length){
+    document.getElementById("love-text").innerText += text.charAt(i);
+    i++; setTimeout(typeWriter, 42);
+  }
+}
+window.addEventListener("load", typeWriter);
+
+// SLOW AUTOPLAY GALLERY
+let slides = document.querySelectorAll(".slide");
+let current = 0;
+slides[current].classList.add("active");
+setInterval(()=>{
+  slides[current].classList.remove("active");
+  current = (current + 1) % slides.length;
+  slides[current].classList.add("active");
+}, 3000);
+
+// Sparkles around name
+function createSparkles(){
+  const container = document.querySelector(".sparkle-container");
+  for(let i=0;i<10;i++){
+    const sparkle = document.createElement("span");
+    sparkle.classList.add("sparkle");
+    sparkle.style.setProperty('--x', `${Math.random()*30-15}px`);
+    sparkle.style.setProperty('--y', `${Math.random()*30-15}px`);
+    sparkle.style.animationDelay = `${Math.random()*3}s`;
+    container.appendChild(sparkle);
+  }
+}
+window.addEventListener("load", createSparkles);
+
+// YES clicked → text, blink, voice, hearts + roses
+function yesClicked(){
+  const proposalText = document.getElementById("proposal-text");
+  proposalText.innerText = "Yes, you are mine now ❤️";
+  proposalText.classList.add("blink-text");
+
+  let audio = new Audio("YOUR_VOICE.mp3");
+  audio.play();
+
+  const hearts=["❤️","💗","💖","💞"];
+  const roses=["🌹","🌷","🌸"];
+  
+  for(let i=0;i<30;i++){
+    let el=document.createElement("div");
+    el.classList.add("rain-item");
+    el.innerText=hearts[Math.floor(Math.random()*hearts.length)];
+    el.style.left=Math.random()*100+"vw";
+    el.style.animationDelay=Math.random()*2+"s";
+    el.style.fontSize=(Math.random()*20+20)+"px";
+    document.body.appendChild(el);
+  }
+
+  for(let i=0;i<20;i++){
+    let el=document.createElement("div");
+    el.classList.add("rose-item");
+    el.innerText=roses[Math.floor(Math.random()*roses.length)];
+    el.style.left=Math.random()*100+"vw";
+    el.style.animationDelay=Math.random()*3+"s";
+    el.style.fontSize=(Math.random()*18+18)+"px";
+    document.body.appendChild(el);
+  }
+}
+</script>
+
+</body>
+</html>
