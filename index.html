@@ -65,12 +65,12 @@ body{background:#fff0f6;overflow-x:hidden;text-align:center;}
 <body>
 
 <!-- Hidden YouTube player for Bargad -->
-<!-- <div style="display:none;">
+<div style="display:none;">
   <iframe id="bg-music-iframe" width="1" height="1"
     src="https://www.youtube.com/embed/sfDyzZPIqSc?enablejsapi=1&loop=1&playlist=sfDyzZPIqSc"
     frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
   </iframe>
-</div> -->
+</div>
 
 <!-- HERO --> 
 <section class="hero">
@@ -94,9 +94,9 @@ body{background:#fff0f6;overflow-x:hidden;text-align:center;}
 <section class="letter">
   <h2>My Heart in Words 💌</h2>
   <div class="type-box"><p id="love-text"></p></div>
-  <!-- <audio controls class="voice-player">
+  <audio controls class="voice-player">
     <source src="proposal.mp3.m4a" type="audio/mp3">
-  </audio> -->
+  </audio>
 </section>
 
 <!-- PROPOSAL -->
@@ -178,8 +178,6 @@ function yesClicked(){
   proposalText.innerText = "Yes, you are mine now ❤️";
   proposalText.classList.add("blink-text");
 
-  // let audio = new Audio("proposal.mp3.m4a");
-  // audio.play();
 
   const hearts=["❤️","💗","💖","💞"];
   const roses=["🌹","🌷","🌸"];
@@ -208,6 +206,7 @@ function yesClicked(){
 
 </body>
 </html>
+
 
 
 
